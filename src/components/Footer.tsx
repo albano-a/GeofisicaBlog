@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -13,6 +13,8 @@ import { useTranslation } from "react-i18next";
 import { US } from "country-flag-icons/react/3x2";
 import { BR } from "country-flag-icons/react/3x2";
 import { FR } from "country-flag-icons/react/3x2";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const languages = [
   {
@@ -48,6 +50,22 @@ const Footer: React.FC = () => {
     i18n.changeLanguage(code);
     handleMenuClose();
   };
+
+  const [dark, setDark] = useState(() =>
+    document.documentElement.classList.contains("dark")
+  );
+
+  const toggleDarkMode = () => {
+    document.documentElement.classList.toggle("dark");
+    setDark((d) => !d);
+  };
+
+  useEffect(() => {
+    const handler = () =>
+      setDark(document.documentElement.classList.contains("dark"));
+    window.addEventListener("storage", handler);
+    return () => window.removeEventListener("storage", handler);
+  }, []);
 
   return (
     <Box
@@ -85,6 +103,9 @@ const Footer: React.FC = () => {
             </MenuItem>
           ))}
         </Menu>
+        <IconButton aria-label="Toggle dark mode" onClick={toggleDarkMode}>
+          {dark ? <LightModeIcon /> : <DarkModeIcon />}
+        </IconButton>
       </Box>
     </Box>
   );

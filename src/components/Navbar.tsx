@@ -13,9 +13,9 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className="flex items-center justify-between px-6 py-3 bg-background-50 relative">
+    <nav className="flex items-center justify-between px-6 py-3 bg-slate-100 dark:bg-slate-900 relative">
       <div className="font-bold text-xl">
-        <a href="/" className="text-text-950 no-underline">
+        <a href="/" className=" dark:text-white no-underline">
           GeofisicaBlog
         </a>
       </div>
@@ -24,26 +24,29 @@ const Navbar: React.FC = () => {
         aria-label="Toggle menu"
         onClick={() => setMenuOpen((open) => !open)}
       >
-        <span className="block w-6 h-0.5 bg-white rounded"></span>
-        <span className="block w-6 h-0.5 bg-white rounded"></span>
-        <span className="block w-6 h-0.5 bg-white rounded"></span>
+        <span className="block w-6 h-0.5 bg-black dark:bg-slate-300 rounded"></span>
+        <span className="block w-6 h-0.5 bg-black dark:bg-slate-300 rounded"></span>
+        <span className="block w-6 h-0.5 bg-black dark:bg-slate-300 rounded"></span>
       </button>
       <ul
         className={`
-                    flex gap-8 list-none m-0 p-0
-                    md:flex
-                    ${menuOpen ? "flex" : "hidden"}
-                    flex-col absolute top-full right-0 bg-gray-900 w-44 shadow-lg md:static md:w-auto md:bg-transparent md:shadow-none md:flex-row md:items-center
-                `}
+          flex gap-8 list-none m-0 p-0
+          md:flex
+          ${menuOpen ? "flex" : "hidden"}
+          flex-col absolute top-full right-0
+          bg-gray-900 dark:bg-slate-900 md:bg-transparent
+          w-44 shadow-lg md:static md:w-auto md:shadow-none md:flex-row md:items-center
+          ${!menuOpen ? "" : "bg-white dark:bg-slate-900"} 
+        `}
       >
         {navLinks.map((link) => (
           <li
             key={link.name}
-            className="md:border-none border-b border-gray-800 last:border-b-0"
+            className="md:border-none border-b border-slate-100 dark:border-slate-700 last:border-b-0"
           >
             <a
               href={link.href}
-              className="block px-4 py-3 md:px-0 md:py-0 text-text-950 no-underline text-base hover:text-text-600 transition-colors"
+              className="block px-4 py-3 md:px-0 md:py-0 dark:text-white no-underline text-base hover:text-text-600 dark:hover:text-slate-300 transition-colors"
               onClick={() => setMenuOpen(false)}
             >
               {link.name}
