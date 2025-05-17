@@ -1,0 +1,9 @@
+{
+  "WelcomeMessage": "Bienvenue à GeofisicaBlog",
+  "Navbar": {
+    "Home": "Maison",
+    "About": "À propos",
+    "Posts": "Publications",
+    "Contact": "Contact"
+  }
+}
