@@ -1,5 +1,7 @@
 {
   "WelcomeMessage": "Bem-vindo ao GeofisicaBlog",
+  "WelcomeDescription": "Percepções modernas para geofísicos, explorando as forças dinâmicas que moldam a nossa Terra.",
+  "BackToHome": "Voltar para o início",
   "Navbar": {
     "Home": "Lar",
     "About": "Sobre",

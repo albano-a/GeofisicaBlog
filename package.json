@@ -12,8 +12,11 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mdxeditor/editor": "^3.32.3",
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
+    "@portabletext/react": "^3.2.1",
+    "@sanity/client": "^7.2.1",
     "@tailwindcss/vite": "^4.1.7",
     "@types/react-router-dom": "^5.3.3",
     "country-flag-icons": "^1.5.19",

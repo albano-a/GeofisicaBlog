@@ -1,6 +1,7 @@
 {
   "WelcomeMessage": "Welcome to GeofisicaBlog",
   "WelcomeDescription": "Modern insights for geophysicists, exploring the dynamic forces that shape our Earth.",
+  "BackToHome": "Back to Home",
   "Navbar": {
     "Home": "Home",
     "About": "About",

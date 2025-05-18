@@ -1,8 +1,28 @@
 import { useTranslation } from "react-i18next";
+import { useState, useEffect } from "react";
 import Divider from "@mui/material/Divider";
+import sanityClient from "../cms/sanityClient";
+import { PortableText } from "@portabletext/react";
 
 export default function Home() {
   const { t } = useTranslation();
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `*[_type == "post"]{
+        _id,
+        title,
+        slug,
+        coverImage{asset->{url}},
+        publishedAt,
+        author->{name},
+        body
+      }`
+      )
+      .then(setPosts);
+  }, []);
   return (
     <>
       <section className="flex flex-col items-center justify-center py-16 px-4">
@@ -22,32 +42,39 @@ export default function Home() {
           </p>
         </Divider>
 
-        {/* Featured Articles */}
-        <div className="w-full max-w-5xl grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8">
-          {[1, 2, 3].map((id) => (
-            <article
-              key={id}
-              className="bg-white rounded-xl shadow hover:shadow-lg transition p-6 flex flex-col"
-            >
-              <img
-                src={`https://source.unsplash.com/random/400x200?sig=${id}`}
-                alt={t("FeaturedArticleAlt", { id })}
-                className="rounded-md mb-4 object-cover h-40 w-full"
-              />
-              <h2 className="text-xl font-semibold mb-2">
-                {t(`FeaturedArticleTitle${id}`)}
-              </h2>
-              <p className="text-gray-600 flex-1">
-                {t(`FeaturedArticleDesc${id}`)}
-              </p>
-              <a
-                href="#"
-                className="mt-4 text-seagreen-700 font-medium hover:underline"
+        {/* Blog Posts */}
+        <div className="w-full max-w-5xl mt-12">
+          <h2 className="text-2xl font-bold mb-6">{t("LatestPosts")}</h2>
+          <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
+            {posts.map((post: any) => (
+              <article
+                key={post._id}
+                className="bg-white rounded-xl shadow hover:shadow-lg transition p-6 flex flex-col"
               >
-                {t("ReadMore")}
-              </a>
-            </article>
-          ))}
+                {post.coverImage?.asset?.url && (
+                  <img
+                    src={post.coverImage.asset.url}
+                    alt={post.title}
+                    className="rounded-md mb-4 object-cover h-40 w-full"
+                  />
+                )}
+                <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
+                <div className="text-gray-500 text-sm mb-2">
+                  {post.author?.name} &middot;{" "}
+                  {new Date(post.publishedAt).toLocaleDateString()}
+                </div>
+                <div className="text-gray-700 flex-1 mb-4 line-clamp-3">
+                  <PortableText value={post.body} />
+                </div>
+                <a
+                  href={`/post/${post.slug?.current}`}
+                  className="mt-2 text-seagreen-700 font-medium hover:underline"
+                >
+                  {t("ReadMore")}
+                </a>
+              </article>
+            ))}
+          </div>
         </div>
 
         {/* Categories */}

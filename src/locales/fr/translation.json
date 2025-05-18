@@ -1,5 +1,7 @@
 {
   "WelcomeMessage": "Bienvenue à GeofisicaBlog",
+  "WelcomeDescription": "Aperçus modernes pour les géophysiciens, explorant les forces dynamiques qui façonnent notre Terre.",
+  "BackToHome": "Retour à l'accueil",
   "Navbar": {
     "Home": "Maison",
     "About": "À propos",
